@@ -44,6 +44,7 @@ namespace CodeKatas.Logic.CountingElements
 
                 if (currentValue > lastValue + 1)
                 {
+                    // The gap is more than 1
                     return lastValue + 1;
                 }
 

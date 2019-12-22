@@ -3,7 +3,7 @@ using Xunit;
 
 namespace CodeKatas.Testing.TimeComplexity
 {
-    public class TapeEquilibriumTests
+    public class PassingCarsTests
     {
 
         [Theory]
