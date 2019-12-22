@@ -3,7 +3,7 @@ using Xunit;
 
 namespace CodeKatas.Testing.PrefixSums
 {
-    public class MinAvgTwoSliceTests
+    public class SortingTests
     {
 
         [Theory]
