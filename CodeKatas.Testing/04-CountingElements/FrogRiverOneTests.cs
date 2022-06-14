@@ -6,6 +6,7 @@ namespace CodeKatas.Testing.CountingElements
     public class FrogRiverOneTests
     {
         [Theory]
+        [InlineData(2, new int[] { 1, 1, 1, 2 }, 3)]
         [InlineData(5, new int[] { 1, 3, 1, 4, 2, 3, 5, 4 }, 6)]
         [InlineData(5, new int[] { 1, 3, 1, 4, 2, 3, 4, 5, 4 }, 7)]
         [InlineData(5, new int[] { 1, 3, 1, 1, 4, 2, 3, 4, 5, 4 }, 8)]

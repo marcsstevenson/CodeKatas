@@ -16,9 +16,13 @@ namespace CodeKatas.Testing.CountingElements
         [InlineData(new int[] { }, 1)]
         [InlineData(new int[] { 1 }, 2)]
         [InlineData(new int[] { 2 }, 1)]
+        [InlineData(new int[] { 2, 4 }, 1)]
+        [InlineData(new int[] { 2, 4, 1, 6, 9, 3 }, 5)]
+        [InlineData(new int[] { -1, -3 }, 1)]
         public void Test(int[] input, int expectedOutput)
         {
-            Assert.Equal(expectedOutput, new MissingInteger().Solve(input));
+            Assert.Equal(expectedOutput, new MissingInteger().SolveWithLinq(input));
+            //Assert.Equal(expectedOutput, new MissingInteger().Solve(input));
         }
     }
 }

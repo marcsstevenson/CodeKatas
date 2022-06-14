@@ -12,7 +12,7 @@ namespace CodeKatas.Testing.PrefixSums
         [InlineData("CAGCCTA", new int[] { 3, 1, 0, 4 }, new int[] { 3, 4, 4, 5 }, new int[] { 2, 1, 1, 2 })]
         public void Test(string s, int[] p, int[] q, int[] expectedOutput)
         {
-            Assert.Equal(expectedOutput, new GenomicRangeQuery().SolveSlowly(s, p, q));
+            Assert.Equal(expectedOutput, new GenomicRangeQuery().Solve(s, p, q));
         }
     }
 }

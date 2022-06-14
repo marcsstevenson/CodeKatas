@@ -7,6 +7,8 @@ namespace CodeKatas.Testing.PrefixSums
     {
 
         [Theory]
+        [InlineData(new int[] { 0, 0, 0, 0, 0 }, 0)]
+        [InlineData(new int[] { 1, 1, 1, 1, 1 }, 0)]
         [InlineData(new int[] { 0, 1, 0, 1, 1 }, 5)]
         [InlineData(new int[] { 1, 1, 0, 1, 1, 0 }, 2)]
         [InlineData(new int[] { 0, 1, 1, 0, 1, 1, 0 }, 6)]

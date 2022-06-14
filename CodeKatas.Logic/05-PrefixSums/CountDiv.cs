@@ -23,7 +23,7 @@ namespace CodeKatas.Logic.PrefixSums
         /// </summary>
         /// <see cref="https://app.codility.com/programmers/lessons/5-prefix_sums/min_avg_two_slice/"/>
         public int Solve(int a, int b, int k)
-        {
+        {            
             // Explanation: Number of integer in the range[1..X] that divisible by K is X / K.So, within the range[A..B], the result is B / K - (A - 1) / K
             // In case a is 0, as 0 is divisible by any positive number, we need to count it in.
 

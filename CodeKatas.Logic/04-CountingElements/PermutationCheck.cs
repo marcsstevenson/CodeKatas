@@ -27,11 +27,11 @@ namespace CodeKatas.Logic.CountingElements
         /// </example>
         /// <see cref="https://app.codility.com/programmers/lessons/4-counting_elements/perm_check/"/>
 
-        public int Solve(int[] array)
+        public int Solve(uint[] array)
         {
-            var set = new HashSet<int>();
-            int max = int.MinValue;
-
+            var set = new HashSet<uint>();
+            uint max = uint.MinValue;
+            
             foreach (var item in array)
             {
                 if (set.Contains(item)) return 0; // We found a duplicate

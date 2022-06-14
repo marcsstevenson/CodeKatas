@@ -56,7 +56,7 @@ namespace CodeKatas.Logic.Sorting
             Array.Sort(upper);
             Array.Sort(lower);
 
-            int intersection = 0; // number of intersections
+            int intersections = 0; // number of intersections
             int j = 0; // for the lower points
             
             // scan the upper points
@@ -65,17 +65,17 @@ namespace CodeKatas.Logic.Sorting
                 // for the current "j" (lower point)
                 while (j < a.Length && upper[i] >= lower[j])
                 {
-                    intersection += j; // add j intersections
-                    intersection -= i; // minus "i" (avoid double count) 
+                    intersections += j; // add j intersections
+                    intersections -= i; // minus "i" (avoid double count) 
                     j++;
                 }
 
                 // for the overflow cases
-                if (intersection > 10000000)
+                if (intersections > 10000000)
                     return -1;
             }
 
-            return intersection; // number of intersections      
+            return intersections; // number of intersections      
         }
 
         public int Solve2(int[] a)

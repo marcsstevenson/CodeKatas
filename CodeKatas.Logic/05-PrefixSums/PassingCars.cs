@@ -1,4 +1,6 @@
-﻿namespace CodeKatas.Logic.PrefixSums
+﻿using System.Linq;
+
+namespace CodeKatas.Logic.PrefixSums
 {
     public class PassingCars
     {

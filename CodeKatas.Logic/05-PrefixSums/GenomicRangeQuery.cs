@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CodeKatas.Logic.PrefixSums
 {
@@ -51,7 +52,13 @@ namespace CodeKatas.Logic.PrefixSums
         /// <see cref="https://app.codility.com/programmers/lessons/5-prefix_sums/genomic_range_query/"/>
         public int[] Solve(string s, int[] p, int[] q)
         {
-            var nucleo = new int[s.Length + 1, 4];
+            var nucleo = new int[s.Length + 1, 4]; // 2 dimensional array
+            var impactMap = new Dictionary<char, int> {
+                { 'A', 1 },
+                { 'C', 2 },
+                { 'G', 3 },
+                { 'T', 4 },
+            };
 
             for (var count = 0; count < s.Length; count++)
             {
@@ -62,7 +69,7 @@ namespace CodeKatas.Logic.PrefixSums
                         nucleo[count + 1, index] += nucleo[count, index];
                     }
                 }
-                nucleo[count + 1, GetNucleotideImpact(s[count]) - 1]++;
+                nucleo[count + 1, impactMap[s[count]] - 1]++;
             }
 
             var result = new int[p.Length];
@@ -73,7 +80,7 @@ namespace CodeKatas.Logic.PrefixSums
                 if (p[count] == q[count])
                 {
                     // Just return the nucleotide impact of this index
-                    result[count] = GetNucleotideImpact(s[p[count]]);
+                    result[count] = impactMap[s[p[count]]];
                 }
                 else
                 {
@@ -102,6 +109,12 @@ namespace CodeKatas.Logic.PrefixSums
         /// </summary>
         public int[] SolveSlowly(string a, int[] p, int[] q)
         {
+            var impactMap = new Dictionary<char, int> {
+                { 'A', 1 },
+                { 'C', 2 },
+                { 'G', 3 },
+                { 'T', 4 },
+            };
             int m = p.Length;
             int[] result = new int[m];
 
@@ -110,27 +123,10 @@ namespace CodeKatas.Logic.PrefixSums
                 string subS = a.Substring(p[i], q[i] - p[i] + 1); // Get the string to examine
                 char[] charSubS = subS.ToCharArray();
                 Array.Sort(charSubS); // Put the lowest impact nucleotide first
-                result[i] = GetNucleotideImpact(charSubS[0]); // Use the value of the first
+                result[i] = impactMap[charSubS[0]]; // Use the value of the first
             }
 
             return result;
-        }
-
-        private int GetNucleotideImpact(char nucleotide)
-        {
-            switch (nucleotide)
-            {
-                case 'A':
-                    return 1;
-                case 'C':
-                    return 2;
-                case 'G':
-                    return 3;
-                case 'T':
-                    return 4;
-                default:
-                    return 0;
-            }
         }
     }
 }
