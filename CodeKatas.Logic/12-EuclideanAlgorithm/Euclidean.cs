@@ -9,11 +9,21 @@
 /// </summary>
 public static class Euclidean
 {
-    public static int GetGreatestCommonDivisor(int i, int j)
+    public static int BySubtraction(int i, int j)
+    {
+        if (i == j) return j;
+
+        // Recurse
+        return (i > j) ?
+            BySubtraction(i - j, j):
+            BySubtraction(i, j - i);
+    }
+    
+    public static int ByDivision(int i, int j)
     {
         if (i % j == 0) return j;
 
         // Recurse
-        return GetGreatestCommonDivisor(j, i % j);
+        return ByDivision(j, i % j);
     }
 }

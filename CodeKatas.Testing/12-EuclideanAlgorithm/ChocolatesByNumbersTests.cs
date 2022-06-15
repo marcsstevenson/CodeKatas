@@ -5,7 +5,7 @@ namespace CodeKatas.Testing.EuclideanAlgorithm;
 /// <summary>
 /// Unit testing for <see cref="ChocolatesByNumbers"/>
 /// </summary>
-public class ChocolatesByNumbersTesting
+public class ChocolatesByNumbersTests
 {
 
     [Theory]

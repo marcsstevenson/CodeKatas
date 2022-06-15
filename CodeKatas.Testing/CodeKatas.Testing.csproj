@@ -23,4 +23,8 @@
     <ProjectReference Include="..\CodeKatas.Logic\CodeKatas.Logic.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="13-FibonacciNumbers\" />
+  </ItemGroup>
+
 </Project>
