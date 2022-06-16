@@ -1,8 +1,6 @@
 using CodeKatas.Logic;
-using System;
-using Xunit;
 
-namespace CodeKatas.Testing;
+namespace CodeKatas.Testing.Iterations;
 
 public class BinaryGapTests
 {
@@ -16,6 +14,6 @@ public class BinaryGapTests
     [InlineData(32, 0)] //100000
     public void BinaryGapsShallReturnAsExpected(int input, int expectedOutput)
     {
-        Assert.Equal(expectedOutput, new BinaryGap().Solve(input));
+        Assert.Equal(expectedOutput, new BinaryGap().solution(input));
     }
 }

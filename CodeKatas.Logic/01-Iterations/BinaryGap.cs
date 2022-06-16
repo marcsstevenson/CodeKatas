@@ -1,24 +1,15 @@
 using System;
 using System.Linq;
 
-namespace CodeKatas.Logic.Iterations;
+namespace CodeKatas.Logic;
 
 public class BinaryGap
 {
-    public int Solve(int n)
+    public int solution(int N)
     {
-        var testParts = Convert
-            // convert to binary
-            .ToString(n, 2)
-            // remove leading and trailing 0s, as per requirement
-            .Trim('0')
-            // split the string by 1s
-            .Split(new[] { '1' })
-            .ToList();
-
         return Convert
             // convert to binary
-            .ToString(n, 2)
+            .ToString(N, 2)
             // remove leading and trailing 0s, as per requirement
             .Trim('0')
             // split the string by 1s
