@@ -8,11 +8,11 @@ public class OddOccurrencesInArray
     /// <summary>
     /// Returns the only element in the array that occurs once
     /// </summary>
-    public int Solve(int[] array)
+    public int Solve(int[] A)
     {
         var tracker = new HashSet<int>();
 
-        foreach (var i in array)
+        foreach (var i in A)
         {
             if (tracker.Contains(i))
             {

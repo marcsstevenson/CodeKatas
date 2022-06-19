@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CodeKatas.Logic.CountingElements;
 
@@ -25,20 +22,18 @@ public class PermutationCheck
     ///     A[1] = 1
     ///     A[2] = 3
     /// </example>
-    /// <see cref="https://app.codility.com/programmers/lessons/4-counting_elements/perm_check/"/>
-
-    public int Solve(uint[] array)
+    /// <remarks>100%</remarks>
+    /// <see cref="https://app.codility.com/programmers/lessons/4-counting_elements/perm_check/"/>    
+    public int Solve(int[] A)
     {
-        var set = new HashSet<uint>();
-        uint max = uint.MinValue;
+        var set = new HashSet<int>();
+        int max = A.Max();
         
-        foreach (var item in array)
+        foreach (var item in A)
         {
             if (set.Contains(item)) return 0; // We found a duplicate
 
             set.Add(item);
-
-            if (item > max) max = item; // Track the maximum value of item
         }
 
         return set.Count == max ? 1 : 0; // We found no duplicates but did we find a result for each item up to the max?

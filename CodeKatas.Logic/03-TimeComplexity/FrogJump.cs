@@ -8,13 +8,13 @@ public class FrogJump
     /// Count the minimal number of jumps that the small frog must perform to reach its target.
     /// </summary>
     /// <see cref="https://app.codility.com/programmers/lessons/3-time_complexity/frog_jmp/"/>
-    public int Solve(int x, int y, int d)
+    public int Solve(int X, int Y, int D)
     {
-        var distanceToCover = y - x;
-        var hops = distanceToCover / d;
+        var distanceToCover = Y - X;
+        var hops = distanceToCover / D;
 
         // Add a last hop if needed
-        if (distanceToCover % d > 0)
+        if (distanceToCover % D > 0)
             hops++;
                    
         return hops;

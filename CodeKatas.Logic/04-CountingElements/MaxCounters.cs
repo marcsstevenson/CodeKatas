@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace CodeKatas.Logic.CountingElements;
+﻿namespace CodeKatas.Logic.CountingElements;
 
 public class MaxCounters
 {
@@ -70,31 +68,49 @@ public class MaxCounters
     ///         N and M are integers within the range [1..100,000];
     ///         each element of array A is an integer within the range[1..N + 1].
     /// </remarks>
-    /// <param name="n">n number of counters</param>
-    /// <param name="array">The array.</param>
+    /// <param name="N">n number of counters</param>
+    /// <param name="A">The array.</param>
     /// <returns>The final values of all counters</returns>
-    public int[] Solve(int n, int[] array)
+    /// <remarks>100%</remarks>
+    public int[] Solve(int N, int[] A)
     {
-        var counters = new int[n];
+        var counters = new int[N];
         var maxCounterValue = 0;
         int index;
+        int minValue = 0;
 
-        foreach (var item in array)
+        foreach (var item in A)
         {
-            if (item == n + 1)
+            if (item == N + 1)
             {
                 // Max the counters by recreating the array using maxCounterValue
-                counters = Enumerable.Repeat<int>(maxCounterValue, n).ToArray();
+                //counters = Enumerable.Repeat<int>(maxCounterValue, N).ToArray();
+
+                // Update the min value
+                minValue = maxCounterValue;
             }
             else
             {
                 index = item - 1;
+
+                // Ensure that the value is at least the min value
+                if (counters[index] < minValue)
+                {
+                    counters[index] = minValue;
+                }
+
                 counters[index]++;
 
                 // Track the max if it has increased
                 if (counters[index] > maxCounterValue)
                     maxCounterValue = counters[index];
             }
+        }
+
+        // Ensure that all counters are set to at least the min value
+        for (int i = 0; i < N; i++)
+        {
+            if (counters[i] < minValue) counters[i] = minValue;
         }
 
         return counters;

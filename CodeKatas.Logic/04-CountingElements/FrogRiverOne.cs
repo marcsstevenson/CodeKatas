@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace CodeKatas.Logic.CountingElements;
 
@@ -58,26 +54,33 @@ public class FrogRiverOne
     /// the function should return 6, as explained above.
     /// </example>
     /// <see cref="https://app.codility.com/programmers/lessons/4-counting_elements/frog_river_one/"/>
-
-    public int Solve(int x, int[] array)
+    /// <remarks>100%</remarks>
+    public int Solve(int X, int[] A)
     {
         var set = new HashSet<int>();            
-        var solutionSum = x * (x + 1) / 2;
-        var runningSum = 0;
+        //var solutionSum = X * (X + 1) / 2;
+        //var runningSum = 0;
 
-        for (int i = 0; i < array.Length; i++)
+        for (int i = 0; i < A.Length; i++)
         {
-            var item = array[i];
+            var item = A[i];
 
             if (set.Contains(item)) continue; // We don't care about duplicates
 
-            if (item > x || item < 1) continue; // We don't care about values over x or less than 1
+            if (item > X || item < 1) continue; // We don't care about values over x or less than 1
 
             set.Add(item);
-            runningSum += item;
+            //runningSum += item;
 
-            // Does our 
-            if (solutionSum == runningSum) return i;
+            // Do we have all of the required values?
+            // We can either look at the count of the hashset
+            // Or we can look at the running sum
+            // Using a hashset is simpler and less error prone
+            if (set.Count == X)
+            {
+                return i;
+            }
+            //if (solutionSum == runningSum) return i;
         }
 
         return -1; // No solution found
