@@ -12,7 +12,7 @@ public class EquiLeaderTests
     [ClassData(typeof(TestDataProvider))]
     public void Shall(int[] pA, int pExpected)
     {
-        Assert.Equal(new EquiLeader().solution(pA), pExpected);
+        Assert.Equal(pExpected, new EquiLeader().solution(pA));
     }
 
     public class TestDataProvider : IEnumerable<object[]>

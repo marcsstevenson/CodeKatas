@@ -40,14 +40,15 @@ public class PassingCars
     /// the function should return 5, as explained above.
     /// </summary>
     /// <see cref="https://app.codility.com/programmers/lessons/5-prefix_sums/passing_cars/"/>
-    public int Solve(int[] a)
+    /// <remarks>100%</remarks>
+    public int Solve(int[] A)
     {
-        if (a.Length > 1000000000) return -1;
+        if (A.Length > 1000000000) return -1;
 
         int passCount = 0;
         int passerCount = 0;
 
-        foreach (int car in a)
+        foreach (int car in A)
         {
             if (car == 0)
             {
@@ -58,6 +59,9 @@ public class PassingCars
             {
                 passCount += passerCount; // Add the number of 0s (passers) that will travel past this 1
             }
+
+            // Handle corner case
+            if (passCount > 1000000000) return - 1;
         }
 
         return passCount;

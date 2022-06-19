@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿namespace CodeKatas.Logic.StacksAndQueues;
 
-namespace CodeKatas.Logic.StacksAndQueues;
-
+/// <remarks>100%</remarks>
 public class StoneWall
 {
     /// Translated from python: https://codility.com/media/train/solution-stone-wall.pdf

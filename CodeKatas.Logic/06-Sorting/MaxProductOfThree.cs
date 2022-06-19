@@ -49,16 +49,17 @@ public class MaxProductOfThree
     /// N is an integer within the range[3..100, 000];
     /// each element of array A is an integer within the range[−1, 000..1, 000].
     /// </summary>
-    public int Solve(int[] a)
+    /// <remarks>100%</remarks>
+    public int Solve(int[] A)
     {
-        Array.Sort(a);
+        Array.Sort(A);
 
         var maxProd1 = 0;
         // Are the 2 first elements negative? If so then we need to check those * the highest element value
-        if (a[1] < 0)
-            maxProd1 = a[0] * a[1] * a[a.Length - 1];
+        if (A[1] < 0)
+            maxProd1 = A[0] * A[1] * A[A.Length - 1];
 
-        var maxProd2 = a[a.Length - 1] * a[a.Length - 2] * a[a.Length - 3];
+        var maxProd2 = A[A.Length - 1] * A[A.Length - 2] * A[A.Length - 3];
 
         // Return the highest result
         return maxProd1 > maxProd2 ? maxProd1 : maxProd2;

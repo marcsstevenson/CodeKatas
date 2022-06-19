@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace CodeKatas.Logic.Sorting;
 
@@ -26,18 +27,24 @@ public class Distinct
     /// N is an integer within the range[0..100, 000];
     /// each element of array A is an integer within the range[−1, 000, 000..1, 000, 000].
     /// </summary>
-    public int Solve(int[] a)
+    public int Solve(int[] A)
     {
-        Array.Sort(a);
+        Array.Sort(A);
         var counter = 1;
 
-        for (int i = 1; i < a.Length; i++)
+        for (int i = 1; i < A.Length; i++)
         {
             // Simply increment the counter if the current value differs from the previous
-            if (a[i - 1] != a[i])
+            if (A[i - 1] != A[i])
                 counter++;
         }
 
         return counter;
+    }
+
+    /// <remarks>100%</remarks>
+    public int SolveWithLinq(int[] A)
+    {
+        return A.Distinct().Count();
     }
 }

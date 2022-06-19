@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CodeKatas.Logic.StacksAndQueues;
 
 public class Nesting
 {
-    public int solution(String S)
+    public int solution(string S)
     {
         // odd numbered length cannot be valid
         if (S.Length % 2 != 0) return 0;
@@ -16,12 +14,12 @@ public class Nesting
         // Empty is ok
         if (S.Length == 0) return 1;
 
-        Dictionary<char, char> brackets = new()
+        var brackets = new Dictionary<char, char>()
         {
             { '(', ')' },
         };
 
-        Stack<char> tracking = new();
+        var tracking = new Stack<char>();
 
         foreach (char c in S)
         {

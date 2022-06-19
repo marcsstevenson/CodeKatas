@@ -55,25 +55,27 @@ public class MinAvgTwoSlice
     ///         each element of array A is an integer within the range[−10, 000..10, 000].
     /// </summary>
     /// <see cref="https://app.codility.com/programmers/lessons/5-prefix_sums/min_avg_two_slice/"/>
-    public int Solve(int[] a)
+    public int Solve(int[] A)
     {
         int minIndex = 0;
         double minValue = double.PositiveInfinity;
 
-        for (int i = 0; i < a.Length - 1; i++)
+        // The solution has to be either a 2 or a 3 element slice
+        // Calculate the rolling average of 2 and 3 elements while tracking the min average
+        for (int i = 0; i < A.Length - 1; i++)
         {
-            var average = (a[i] + a[i + 1]) / 2.0;
+            var average = (A[i] + A[i + 1]) / 2.0;
             if (average < minValue)
             {
                 minIndex = i;
-                minValue = (a[i] + a[i + 1]) / 2.0;
+                minValue = (A[i] + A[i + 1]) / 2.0;
 
             }
 
             // Try 3 elements up until index length - 2
-            if (i < a.Length - 2)
+            if (i < A.Length - 2)
             {
-                average = (a[i] + a[i + 1] + a[i + 2]) / 3.0;
+                average = (A[i] + A[i + 1] + A[i + 2]) / 3.0;
                 if (average < minValue)
                 {
                     minIndex = i;

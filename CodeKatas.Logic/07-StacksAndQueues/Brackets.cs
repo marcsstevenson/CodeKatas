@@ -4,36 +4,38 @@ using System.Linq;
 
 namespace CodeKatas.Logic.StacksAndQueues;
 
+/// <remarks>100%</remarks>
 public class Brackets
 {
-    public int solution(String S)
+    public int solution(string S)
     {
         // odd numbered length cannot be valid
         if (S.Length % 2 != 0) return 0;
         
         // Empty is ok
         if (S.Length == 0) return 1;
-
-        Dictionary<char, char> brackets = new()
+        
+        var brackets = new Dictionary<char, char>()
         {
             { '(', ')' },
             { '[', ']' },
             { '{', '}' }
         };
 
-        Stack<char> tracking = new();
+        var stack = new Stack<char>();
 
         foreach (char c in S)
         {
+            // Is c an opening bracket?
             if (brackets.ContainsKey(c))
             {
-                tracking.Push(c);
+                stack.Push(c);
             }
             else
-            {
-                if (!tracking.Any()) return 0;
+            { // c should be a closing bracket for the top of the stack
+                if (!stack.Any()) return 0;
 
-                var popped = tracking.Pop();
+                var popped = stack.Pop();
 
                 // Is this a valid closing bracket?
                 if (brackets[popped] != c) return 0; // Fail                
@@ -41,7 +43,7 @@ public class Brackets
         }
 
         // We made it this far
-        if (!tracking.Any()) return 1;
+        if (!stack.Any()) return 1;
         
         return 0;
     }

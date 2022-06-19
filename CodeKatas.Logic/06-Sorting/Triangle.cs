@@ -36,26 +36,27 @@ public class Triangle
     ///     N is an integer within the range[0..100, 000];
     ///     each element of array A is an integer within the range[−2, 147, 483, 648..2, 147, 483, 647].
     /// </summary>
-    public int Solve(int[] a)
+    /// <remarks>100%</remarks>
+    public int Solve(int[] A)
     {
-        if (a.Length < 3) return 0;
+        if (A.Length < 3) return 0;
 
-        Array.Sort(a);
+        Array.Sort(A);
 
         // By sorting the array, we have guaranteed that P+R > Q and Q+R > P (because R is always the biggest). 
         // Now what remains, is the proof that P+Q > R, that can be found out by traversing the array.
 
-        for (int i = 0; i < a.Length - 2; i++)
+        for (int i = 0; i < A.Length - 2; i++)
         {
-            if (a[i] + a[i + 1] > a[i + 2])
+            if (A[i] + A[i + 1] > A[i + 2])
             {
                 return 1;
             }
 
             // Handle the corner case of having at least 3 x int.MaxValue
-            if (a[i] == a[i + 2] &&
-                a[i + 2] == a[i + 1] &&
-                a[i] == int.MaxValue)
+            if (A[i] == A[i + 2] &&
+                A[i + 2] == A[i + 1] &&
+                A[i] == int.MaxValue)
             {
                 return 1;
             }

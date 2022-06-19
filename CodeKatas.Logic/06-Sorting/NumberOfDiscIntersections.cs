@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 
 namespace CodeKatas.Logic.Sorting;
 
@@ -35,21 +34,22 @@ public class NumberOfDiscIntersections
     /// 
     ///     N is an integer within the range[0..100, 000];
     ///     each element of array A is an integer within the range[0..2, 147, 483, 647].
-    /// </summary>
-    public int Solve(int[] a)
+    /// </summary>    /// 
+    /// <remarks>100%</remarks>
+    public int Solve(int[] A)
     {
         // main idea:
         // 1. store all the "lower points" and "upper points" of the discs
         // 2. count the intersections (if one upper point > one lower point)
 
         // note: use "long" for big numbers (be careful)
-        long[] lower = new long[a.Length];
-        long[] upper = new long[a.Length];
+        long[] lower = new long[A.Length];
+        long[] upper = new long[A.Length];
 
-        for (int i = 0; i < a.Length; i++)
+        for (int i = 0; i < A.Length; i++)
         {
-            lower[i] = i - (long)a[i]; // note: lower = center - A[i]
-            upper[i] = i + (long)a[i]; // note: upper = center + A[i]
+            lower[i] = i - (long)A[i]; // note: lower = center - A[i]
+            upper[i] = i + (long)A[i]; // note: upper = center + A[i]
         }
 
         // "sort" the "lower points" and "upper points"
@@ -60,10 +60,10 @@ public class NumberOfDiscIntersections
         int j = 0; // for the lower points
         
         // scan the upper points
-        for (int i = 0; i < a.Length; i++)
+        for (int i = 0; i < A.Length; i++)
         {
             // for the current "j" (lower point)
-            while (j < a.Length && upper[i] >= lower[j])
+            while (j < A.Length && upper[i] >= lower[j])
             {
                 intersections += j; // add j intersections
                 intersections -= i; // minus "i" (avoid double count) 
@@ -78,17 +78,15 @@ public class NumberOfDiscIntersections
         return intersections; // number of intersections      
     }
 
-    public int Solve2(int[] a)
+    public int Solve2(int[] A)
     {
-        // Create a list of tuples containing the west and east x transects of each circle
-        //Tuple<int, int>[] transects = Enumerable.Range(0, a.Length - 1).Select(x => Tuple.Create(0, 0)).ToArray();
+        // Create a arrays containing the west and east x transects of each circle
+        int[] westEnding = new int[A.Length];
+        int[] eastEnding = new int[A.Length];
 
-        int[] westEnding = new int[a.Length];
-        int[] eastEnding = new int[a.Length];
-
-        for (int i = 0; i < a.Length; i++)
+        for (int i = 0; i < A.Length; i++)
         {
-            var aVal = a[i];
+            var aVal = A[i];
 
             // Is the West transect positive?
             if (i - aVal >= 0)
@@ -97,17 +95,17 @@ public class NumberOfDiscIntersections
                 eastEnding[0]++;
 
             // Is the East transect positive?
-            if ((long)i + aVal < a.Length)
+            if ((long)i + aVal < A.Length)
                 westEnding[i + aVal]++;
             else
-                westEnding[a.Length - 1]++;
+                westEnding[A.Length - 1]++;
         }
 
         long result = 0; // long to contain the case of 50k*50k. Codility doesn't test for this.
         int wests = 0;
         int easts = 0;
 
-        for (int i = 0; i < a.Length; i++)
+        for (int i = 0; i < A.Length; i++)
         {
             int balance = easts * wests; // these are calculated elsewhere
 

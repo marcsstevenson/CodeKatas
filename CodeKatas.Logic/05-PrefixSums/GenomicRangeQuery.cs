@@ -50,9 +50,11 @@ public class GenomicRangeQuery
     /// string S consists only of upper-case English letters A, C, G, T.
     /// </summary>
     /// <see cref="https://app.codility.com/programmers/lessons/5-prefix_sums/genomic_range_query/"/>
-    public int[] Solve(string s, int[] p, int[] q)
+    /// <remarks>100%</remarks>
+
+    public int[] Solve(string S, int[] P, int[] Q)
     {
-        var nucleo = new int[s.Length + 1, 4]; // 2 dimensional array
+        var nucleo = new int[S.Length + 1, 4]; // 2 dimensional array
         var impactMap = new Dictionary<char, int> {
             { 'A', 1 },
             { 'C', 2 },
@@ -60,7 +62,7 @@ public class GenomicRangeQuery
             { 'T', 4 },
         };
 
-        for (var count = 0; count < s.Length; count++)
+        for (var count = 0; count < S.Length; count++)
         {
             if (count > 0)
             {
@@ -69,26 +71,108 @@ public class GenomicRangeQuery
                     nucleo[count + 1, index] += nucleo[count, index];
                 }
             }
-            nucleo[count + 1, impactMap[s[count]] - 1]++;
+            nucleo[count + 1, impactMap[S[count]] - 1]++;
         }
 
-        var result = new int[p.Length];
+        var result = new int[P.Length];
 
-        for (var count = 0; count < p.Length; count++)
+        for (var count = 0; count < P.Length; count++)
         {
             // Are we examining a range of length 1?
-            if (p[count] == q[count])
+            if (P[count] == Q[count])
             {
                 // Just return the nucleotide impact of this index
-                result[count] = impactMap[s[p[count]]];
+                result[count] = impactMap[S[P[count]]];
             }
             else
             {
                 // Examine each element of the length 4 array at index count and count + 1
                 for (var index = 0; index < 4; index++)
                 {
-                    var pCount = p[count];
-                    var qCountPlus1 = q[count] + 1;
+                    var pCount = P[count];
+                    var qCountPlus1 = Q[count] + 1;
+                    var nucleoQCountPlus1Index = nucleo[qCountPlus1, index];
+                    var nucleoPCount = nucleo[pCount, index];
+
+                    if ((nucleoQCountPlus1Index - nucleoPCount) > 0)
+                    {
+                        result[count] = index + 1;
+                        break;
+                    }
+                }
+            }
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    /// Create trackers of the number of nucleotides of each type
+    /// </summary>
+    public class Tracker
+    {
+        private Dictionary<char, int> _nucleo = new Dictionary<char, int> {};
+
+        public Tracker(char c, Tracker global)
+        {
+            var count = global.Increment(c);
+            _nucleo.Add(c, count);
+        }
+
+        public int Increment(char c)
+        {
+            if (_nucleo.ContainsKey(c))
+            {
+                _nucleo[c]++; // Increment
+            }
+            else
+            {
+                _nucleo.Add(c, 1); // First time seen
+            }
+
+            return _nucleo[c];
+        }
+    }
+
+    public int[] SolveWithArrays(string S, int[] P, int[] Q)
+    {
+        var nucleo = new int[S.Length + 1, 4]; // 2 dimensional array
+        var impactMap = new Dictionary<char, int> {
+            { 'A', 1 },
+            { 'C', 2 },
+            { 'G', 3 },
+            { 'T', 4 },
+        };
+
+        for (var count = 0; count < S.Length; count++)
+        {
+            if (count > 0)
+            {
+                for (var index = 0; index < 4; index++)
+                {
+                    nucleo[count + 1, index] += nucleo[count, index];
+                }
+            }
+            nucleo[count + 1, impactMap[S[count]] - 1]++;
+        }
+
+        var result = new int[P.Length];
+
+        for (var count = 0; count < P.Length; count++)
+        {
+            // Are we examining a range of length 1?
+            if (P[count] == Q[count])
+            {
+                // Just return the nucleotide impact of this index
+                result[count] = impactMap[S[P[count]]];
+            }
+            else
+            {
+                // Examine each element of the length 4 array at index count and count + 1
+                for (var index = 0; index < 4; index++)
+                {
+                    var pCount = P[count];
+                    var qCountPlus1 = Q[count] + 1;
                     var nucleoQCountPlus1Index = nucleo[qCountPlus1, index];
                     var nucleoPCount = nucleo[pCount, index];
 
@@ -107,7 +191,8 @@ public class GenomicRangeQuery
     /// <summary>
     /// A low performance solution for understanding purposes
     /// </summary>
-    public int[] SolveSlowly(string a, int[] p, int[] q)
+    /// <remarks>62% failing on performance checks</remarks>
+    public int[] SolveSlowly(string S, int[] P, int[] Q)
     {
         var impactMap = new Dictionary<char, int> {
             { 'A', 1 },
@@ -115,12 +200,12 @@ public class GenomicRangeQuery
             { 'G', 3 },
             { 'T', 4 },
         };
-        int m = p.Length;
+        int m = P.Length;
         int[] result = new int[m];
 
         for (int i = 0; i < m; i++)
         {
-            string subS = a.Substring(p[i], q[i] - p[i] + 1); // Get the string to examine
+            string subS = S.Substring(P[i], Q[i] - P[i] + 1); // Get the string to examine
             char[] charSubS = subS.ToCharArray();
             Array.Sort(charSubS); // Put the lowest impact nucleotide first
             result[i] = impactMap[charSubS[0]]; // Use the value of the first

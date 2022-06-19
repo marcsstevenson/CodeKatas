@@ -22,9 +22,11 @@ public class CountDiv
     ///  A ≤ B.
     /// </summary>
     /// <see cref="https://app.codility.com/programmers/lessons/5-prefix_sums/min_avg_two_slice/"/>
-    public int Solve(int a, int b, int k)
+    /// <remarks>100%</remarks>
+    public int Solve(int A, int B, int K)
     {            
-        // Explanation: Number of integer in the range[1..X] that divisible by K is X / K.So, within the range[A..B], the result is B / K - (A - 1) / K
+        // Explanation: Number of integers in the range[1..B] that divisible by K is B / K.
+        // So, within the range[A..B], the result is B / K - (A - 1) / K
         // In case a is 0, as 0 is divisible by any positive number, we need to count it in.
 
         //int offsetForLeftRange = 0;
@@ -33,9 +35,9 @@ public class CountDiv
 
         //return (b / k) - (a / k) + offsetForLeftRange;
 
-        int bDiv = b / k;
-        int aDiv = (a > 0 ? (a - 1) / k : 0);
-        if (a == 0)
+        int bDiv = B / K;
+        int aDiv = (A > 0 ? (A - 1) / K : 0);
+        if (A == 0)
         {
             bDiv++;
         }
