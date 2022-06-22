@@ -1,36 +1,35 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CodeKatas.Logic.MaximumSliceProblem;
 
 public class MaxProfit
 {
+    /// <remarks>
+    /// 100%
+    /// </remarks>
     public int solution(int[] A)
     {
-        if (A.Length < 2) return 0; //for empty array or 1 element array, no profit can be realized
+        // Build a list of deltas for all elements
+        var deltas = new List<int>() { 0 };
 
-        //convert profit table to delta table so can use max slice technique
-        int[] deltaA = new int[A.Length];
-        deltaA[0] = 0;
-        
         for (int i = 1; i < A.Length; i++)
         {
-            deltaA[i] = A[i] - A[i - 1];
+            deltas.Add(A[i] - A[i - 1]);
         }
 
-        int absoluteMax = deltaA[0];
-        int localMax = deltaA[0];
-        int nextSum;
-        int currentDelta;
+        // Iterate over all deltas to determine the max overall delta
+        int localMax = 0;
+        int absoluteMax = 0;
 
-        for (int i = 1; i < deltaA.Length; i++) 
-        { 
-            currentDelta = deltaA[i]; 
-            nextSum = localMax + currentDelta; 
-            localMax = Math.Max(currentDelta, nextSum); 
-            absoluteMax = Math.Max(absoluteMax, localMax); 
+        for (int i = 1; i < deltas.Count; i++)
+        {
+            var currentDelta = deltas[i];
+            var nextSum = localMax + currentDelta;
+            localMax = Math.Max(currentDelta, nextSum);
+            absoluteMax = Math.Max(localMax, absoluteMax);
         }
-        if (absoluteMax > 0) return absoluteMax;
 
-        return 0;
+        return absoluteMax > 0 ? absoluteMax : 0;
     }
 }
