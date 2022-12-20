@@ -16,7 +16,11 @@ public class MinPerimeterRectangle
             // Is i a divisor of N?
             if (N % i == 0)
             {
-                return (i + N/i) * 2;
+                // One side of the rectangle is length i
+                // The other side the must be N/i so that i * N/i = N (the area)
+
+                // Return the resultant perimeter of this rectangle
+                return (i + N/i) * 2; 
             }
 
             i--;

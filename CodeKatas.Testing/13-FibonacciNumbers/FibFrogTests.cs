@@ -7,7 +7,6 @@ namespace CodeKatas.Testing.FibonacciNumbers;
 /// </summary>
 public class FibFrogTests
 {
-
     [Theory]
     [InlineData(new int[]{ 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0}, 3)]
     public void Shall(int[] A, int expected)

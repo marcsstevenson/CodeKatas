@@ -1,4 +1,6 @@
-﻿namespace CodeKatas.Logic.PrimeAndCompositeNumbers;
+﻿using System;
+
+namespace CodeKatas.Logic.PrimeAndCompositeNumbers;
 
 public class CountingDivisors
 {
@@ -6,16 +8,26 @@ public class CountingDivisors
     /// Returns the count of divisors of a number.
     /// </summary>
     /// <remarks>Divisors are also known as factors</remarks>
-    public uint GetDivisors(uint n)
+    public int GetDivisors(int N)
     {
-        uint i = 1;
-        uint divisors = 0;
+        int i = 1;
+        int divisors = 0;
+        int squareRootN = (int)Math.Sqrt(N);
+
+        if (Math.Pow(squareRootN, 2) != N)
+        {
+            squareRootN++; //round up for any non-perfect squares
+        }
+        else
+        { //perfect squares have an additional factor
+            divisors++;
+        }
 
         // Iterate up to the square root of the number because
         // that is as far as needed to find all pairs of divisors.
-        while (i * i < n)
+        while (i < squareRootN)
         {
-            if (n % i == 0)
+            if (N % i == 0)
             {
                 divisors += 2; // We found a pair
             }
@@ -23,9 +35,9 @@ public class CountingDivisors
             i++;
         }
 
-        // Check if the number is a perfect square
-        if (i * i == n)
-            divisors += 1; // Only count unique results when we find the square root
+        //// Check if the number is a perfect square
+        //if (i * i == N)
+        //    divisors += 1; // Only count unique results when we find the square root
 
         return divisors;
     }

@@ -12,7 +12,8 @@ public class CountingDivisorsTests
     [InlineData(4, 3)]
     [InlineData(6, 4)]
     [InlineData(24, 8)]
-    public void Shall(uint n, uint expectedCount)
+    [InlineData(int.MaxValue, 2)]
+    public void Shall(int n, int expectedCount)
     {
         // Act
         var count = new CountingDivisors().GetDivisors(n);

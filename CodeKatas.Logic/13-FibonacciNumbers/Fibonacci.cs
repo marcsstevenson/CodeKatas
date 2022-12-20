@@ -12,9 +12,11 @@ public static class Fibonacci
 
     public static List<int> GetFibonacciNumbersAsList(int n, int? limit = null)
     {
-        var fibonacciNumbers = new List<int>();
-        fibonacciNumbers.Add(0);
-        fibonacciNumbers.Add(1);
+        var fibonacciNumbers = new List<int>
+        {
+            0,
+            1
+        };
 
         for (int i = 2; i < n; i++)
         {
